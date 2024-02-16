@@ -1,11 +1,17 @@
 <?php
 
+/**
+ * @package   Update new user
+ * @author    Ntabethemba Ntshoza
+ * @date      16-02-2024
+ * @copyright Copyright © 2024 VMP By Maneza
+ */
+
 namespace Controller;
 
 use Model\Person;
-use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-
+use Monolog\Logger;
 
 class UserEditSubmitController
 {
@@ -16,7 +22,7 @@ class UserEditSubmitController
      *
      * @param [type] $logger
      */
-    public function __construct( $logger = null)
+    public function __construct($logger = null)
     {
         $this->logger = new Logger('update-user-controller');
         $this->logger->pushHandler(new StreamHandler('var/System.log', Logger::DEBUG));
@@ -34,7 +40,6 @@ class UserEditSubmitController
             redirect('/');
         }
 
-
         // Check if the form is submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Create an instance of the Task class
@@ -49,7 +54,6 @@ class UserEditSubmitController
             // $birthDate = $_POST['birth_date'];
             $language = $_POST['language'];
             $interests = $_POST['interests'];
-    
 
             $person->setId($id);
             $person->setName($name);
@@ -66,7 +70,7 @@ class UserEditSubmitController
                 $this->logger->info("User {$person->getName()} is updated succesfully ");
                 // Redirect back to edit page with success message
                 return redirect("/");
-            }else {
+            } else {
                 $_SESSION['user_update_error'] = "Error during execution of the SQL statement: ";
                 return redirect("/user-edit?id=$id");
             }

@@ -160,12 +160,24 @@ class Person
         return $this->interests;
     }
 
+    /**
+     * Email validation
+     *
+     * @param [type] $email
+     * @return void
+     */
     public function validateEmail($email)
     {
         // Use PHP's built-in filter_var function to validate email
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 
+    /**
+     * Mobile validation
+     *
+     * @param [type] $mobileNumber
+     * @return void
+     */
     public function validateMobileNumber($mobileNumber)
     {
         // Remove non-numeric characters from the mobile number
@@ -175,6 +187,12 @@ class Person
         return strlen($numericMobileNumber) >= 10 && strlen($numericMobileNumber) <= 14;
     }
 
+    /**
+     * RSA ID Validation
+     *
+     * @param [type] $rsaIdNumber
+     * @return void
+     */
     public function validateSAIdNumber($rsaIdNumber)
     {
         // Remove non-numeric characters from the mobile number

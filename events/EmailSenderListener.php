@@ -1,17 +1,23 @@
 <?php
 
+/**
+ * @package   Sender event listner
+ * @author    Ntabethemba Ntshoza
+ * @date      16-02-2024
+ * @copyright Copyright © 2024 VMP By Maneza
+ */
+
 namespace Events;
 
-use League\Event\Listener;
 use Controller\EmailSenderController;
-use League\Event\EventInterface;
+use League\Event\Listener;
 
 class EmailSenderListener implements Listener
 {
     protected $emailSender;
 
     /**
-     * Email sender event listner 
+     * Email sender event listner
      *
      * @param EmailSenderController $emailSender
      */
@@ -33,4 +39,3 @@ class EmailSenderListener implements Listener
         $this->emailSender->sendEmail($userId);
     }
 }
-

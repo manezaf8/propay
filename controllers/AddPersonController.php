@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @package   Add a new user
+ * @author    Ntabethemba Ntshoza
+ * @date      16-02-2024
+ * @copyright Copyright © 2024 VMP By Maneza
+ */
+
 namespace Controller;
 
 use Model\Person;

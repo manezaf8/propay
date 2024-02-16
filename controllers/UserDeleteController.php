@@ -1,11 +1,17 @@
 <?php
 
+/**
+ * @package   Delete Controller
+ * @author    Ntabethemba Ntshoza
+ * @date      16-02-2024
+ * @copyright Copyright © 2024 VMP By Maneza
+ */
+
 namespace Controller;
 
 use Model\Person;
-use Model\Task;
-use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class UserDeleteController
 {
@@ -16,7 +22,7 @@ class UserDeleteController
      *
      * @param Logger $logger
      */
-    public function __construct( $logger = null)
+    public function __construct($logger = null)
     {
         $this->logger = new Logger('delete-user-controller');
         $this->logger->pushHandler(new StreamHandler('var/System.log', Logger::DEBUG));
@@ -35,7 +41,7 @@ class UserDeleteController
             $user = new Person();
 
             if ($user->delete($userId)) {
-                
+
                 $this->logger->info('User deleted succeefully');
                 return redirect('/?delete_success=1');
             } else {

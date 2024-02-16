@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Edit Task - VMP Tasks management</title>
+    <title>404</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Responsive Minimal Bootstrap Theme">
     <meta name="keywords" content="responsive,minimal,bootstrap,theme">
