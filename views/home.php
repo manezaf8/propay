@@ -79,7 +79,7 @@ $extensionPath = $config['path']['additionalPath'];
                                 <li><a href="<?= BASE_URL . '/users' ?>">Home</a>
                                 </li>
                             <?php elseif (!isset($_SESSION['user_id'])) : ?>
-                                <li><a href="<?= BASE_URL . '/' ?>">Home</a>
+                                <li><a href="<?= BASE_URL . '' ?>">Home</a>
                                 </li>
                             <?php endif; ?>
                             <li class="sep">/</li>

@@ -71,10 +71,10 @@ use Model\Person;
                         <span><a href="<?= BASE_URL ?>">Propay</a> / user infortmation</span>
                         <ul class="crumb">
                             <?php if (isset($_SESSION['user_id'])): ?>
-                                <li><a href="<?=BASE_URL . '/users'?>">Home</a>
+                                <li><a href="<?=BASE_URL . 'users'?>">Home</a>
                                 </li>
                             <?php elseif (!isset($_SESSION['user_id'])): ?>
-                                <li><a href="<?=BASE_URL . '/'?>">Home</a>
+                                <li><a href="<?=BASE_URL ?>">Home</a>
                                 </li>
                             <?php endif;?>
                             <li class="sep">/</li>
@@ -139,7 +139,7 @@ if (isset($_GET['id'])) {
 
         $base = BASE_URL;
         // Add a "Return to All Tasks" button
-        echo "<a href='" . BASE_URL . '/' . "' class='btn btn-primary'>Return to Users</a>";
+        echo "<a href='" . BASE_URL . "' class='btn btn-primary'>Return to Users</a>";
     } else {
         // User not found, display an error message
         echo "<div class='alert alert-danger'>User not found, make sure you provide a correct user id.</div>";

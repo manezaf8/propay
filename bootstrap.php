@@ -5,8 +5,9 @@ require BASE_PATH . '/helper/functions.php';
 
 $config = include 'config.php';
 $extensionPath = $config['path']['additionalPath'];
+$siteUrl = getSiteUrl();
 
-define('BASE_URL', "http://localhost:8100{$extensionPath}");
+define('BASE_URL', $siteUrl.$extensionPath);
 
 use Monolog\Logger;
 use Controller\EmailSenderController;

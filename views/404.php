@@ -56,9 +56,9 @@
                 <div id="logo" style=" width: 250px; height: auto; ">
                     <div class="inner">
                         <?php if (isset($_SESSION['user_id'])) : ?>
-                            <a href="<?= BASE_URL . '/' ?>">
+                            <a href="<?= BASE_URL . '' ?>">
                             <?php elseif (!isset($_SESSION['user_id'])) : ?>
-                                <a href="<?= BASE_URL . '/' ?>">
+                                <a href="<?= BASE_URL . '' ?>">
                                 <?php endif; ?>
                                 <h1 style="padding-left: 11em;" >PRO<span style="color: red;">pay</span> </h1></a>
                     </div>
