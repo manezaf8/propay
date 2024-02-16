@@ -1,0 +1,47 @@
+version: '3.8'
+
+# Let's build all the services required to run this app (dev version)
+# We need -
+# MySQL => Database
+# Apache2 => Web Server
+# phpMyAdmin
+services:
+  php-apache-environment:
+    container_name: php-apache
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html/
+    ports:
+      - 8100:80
+      - "9001:9001" #xdebug port
+
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin124
+      MYSQL_DATABASE: propay
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin124
+    ports:
+      - "9906:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8080:80'
+    restart: always
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  mysql-data:

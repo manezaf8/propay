@@ -1,0 +1,29 @@
+/*//////////////// Custom css ///////////////// */
+        .form-container {
+            max-width: 400px;
+            padding: 68px;
+            border: 1px solid #d1d1d1;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 45px;
+            /* Adjust height as needed */
+        }
+
+        .form-container h2 {
+            text-align: center;
+        }
+
+        #btnsubmit {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        select[multiple],
+        select[size] {
+            height: 11em;
+        }
