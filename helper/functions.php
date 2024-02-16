@@ -25,6 +25,29 @@ function redirect($path)
 }
 
 /**
+ * Custom get error
+ *
+ * @return void
+ */
+function getError() {
+    $errors = [];
+
+    // Check if there are PHP errors
+    if ($error = error_get_last()) {
+        $errors[] = $error;
+    }
+
+    // Check if there are session errors
+    if (isset($_SESSION['errors']) && is_array($_SESSION['errors'])) {
+        $errors = array_merge($errors, $_SESSION['errors']);
+        unset($_SESSION['errors']); // Clear session errors
+    }
+
+    return $errors;
+}
+
+
+/**
  * Base path for uri
  *
  * @param string $path

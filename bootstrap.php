@@ -7,7 +7,7 @@ $config = include 'config.php';
 $extensionPath = $config['path']['additionalPath'];
 $siteUrl = getSiteUrl();
 
-define('BASE_URL', $siteUrl.$extensionPath);
+define('BASE_URL', getSiteUrl());
 
 use Monolog\Logger;
 use Controller\EmailSenderController;
@@ -26,10 +26,9 @@ $logger->pushHandler(new StreamHandler('var/System.log', Logger::DEBUG));
 // Create an instance of the listener registry
 $listenerRegistry = new PrioritizedListenerRegistry();
 
-// Create an instance of the event dispatcher and pass the listener registry
 $dispatcher = new EventDispatcher($listenerRegistry);
 
-// Create an instance of the listener and pass any required dependencies
+// Create an instance of the listener and pass EmailSenderController
 $listener = new EmailSenderListener(new EmailSenderController());
 
 // Subscribe to the event with the listener and priority

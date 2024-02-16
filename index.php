@@ -6,8 +6,6 @@ error_reporting(E_ALL);
 
 const BASE_PATH = __DIR__;
 
-// require BASE_PATH . '/vendor/autoload.php'; // moved to boodstrap file
-// require BASE_PATH . '/helper/functions.php';
 require_once  BASE_PATH . '/bootstrap.php';
 
 session_start();
@@ -68,5 +66,7 @@ if (array_key_exists($cleanRoute, $routes)) {
     // Call the method with the arguments
     $controllerInstance->$method(...$methodArguments);
 } else {
+    
+    $logger->error("Page not found, Check the config for additional path");
     abort();
 }
