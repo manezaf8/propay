@@ -9,11 +9,11 @@
 
 namespace Controller;
 
-use Model\Person;
-use Monolog\Logger;
-use League\Event\EventDispatcher;
 use Events\NewUserRegisteredEvent;
+use League\Event\EventDispatcher;
+use Model\Person;
 use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class AddPersonController
 {
@@ -78,7 +78,7 @@ class AddPersonController
                     $_SESSION['registration_success'] = 'Heey!!! you added  ' . $person->getName() . '  successfully...';
                     $userId = $person->getId();
                     // Trigger the event
-                    $event = new NewUserRegisteredEvent((int)$userId);
+                    $event = new NewUserRegisteredEvent((int) $userId);
                     $this->dispatcher->dispatch($event);
 
                     return redirect('/');

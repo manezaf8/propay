@@ -29,23 +29,23 @@ function redirect($path)
  *
  * @return void
  */
-function getError() {
-    $errors = [];
+function getError()
+{
+	$errors = [];
 
-    // Check if there are PHP errors
-    if ($error = error_get_last()) {
-        $errors[] = $error;
-    }
+	// Check if there are PHP errors
+	if ($error = error_get_last()) {
+		$errors[] = $error;
+	}
 
-    // Check if there are session errors
-    if (isset($_SESSION['errors']) && is_array($_SESSION['errors'])) {
-        $errors = array_merge($errors, $_SESSION['errors']);
-        unset($_SESSION['errors']); // Clear session errors
-    }
+	// Check if there are session errors
+	if (isset($_SESSION['errors']) && is_array($_SESSION['errors'])) {
+		$errors = array_merge($errors, $_SESSION['errors']);
+		unset($_SESSION['errors']); // Clear session errors
+	}
 
-    return $errors;
+	return $errors;
 }
-
 
 /**
  * Base path for uri
@@ -73,23 +73,23 @@ function abort($code = Response::NOT_FOUND)
 	die();
 }
 
-    /**
-     * Get Website URL
-     *
-     * @param string $path
-     * @return string
-     */
-    function getSiteUrl($path = '')
-    {
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-        $host = $_SERVER['HTTP_HOST'];
-        $scriptName = $_SERVER['SCRIPT_NAME'];
+/**
+ * Get Website URL
+ *
+ * @param string $path
+ * @return string
+ */
+function getSiteUrl($path = '')
+{
+	$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+	$host = $_SERVER['HTTP_HOST'];
+	$scriptName = $_SERVER['SCRIPT_NAME'];
 
-        // Remove the script filename to get the base URL
-        $baseUrl = dirname($scriptName);
+	// Remove the script filename to get the base URL
+	$baseUrl = dirname($scriptName);
 
-        return $protocol . $host . $baseUrl . $path;
-    }
+	return $protocol . $host . $baseUrl . $path;
+}
 
 /**
  * Check if data is serialized
@@ -144,7 +144,7 @@ function is_serialized($data, $strict = true)
 			} elseif (!str_contains($data, '"')) {
 				return false;
 			}
-			// Or else fall through.
+		// Or else fall through.
 		case 'a':
 		case 'O':
 		case 'E':

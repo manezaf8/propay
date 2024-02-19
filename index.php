@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 const BASE_PATH = __DIR__;
 
-require_once  BASE_PATH . '/bootstrap.php';
+require_once BASE_PATH . '/bootstrap.php';
 
 session_start();
 
@@ -32,7 +32,6 @@ if (array_key_exists($cleanRoute, $routes)) {
     $controllerNamespace = 'Controller\\';
     $controllerPath = BASE_PATH . '/controllers/';
 
-
     require $controllerPath . $controller . '.php';
 
     // Assuming the controllers are in a namespace
@@ -55,18 +54,18 @@ if (array_key_exists($cleanRoute, $routes)) {
     // Check if the method requires parameters
     $reflectionMethod = new ReflectionMethod($controller, $method);
     $parameters = $reflectionMethod->getParameters();
-    
+
     // If the method has parameters, pass them
     $methodArguments = [];
     foreach ($parameters as $parameter) {
         $parameterName = $parameter->getName();
         $methodArguments[] = $queryParams[$parameterName] ?? null;
     }
-    
+
     // Call the method with the arguments
     $controllerInstance->$method(...$methodArguments);
 } else {
-    
+
     $logger->error("Page not found, Check the config for additional path");
     abort();
 }

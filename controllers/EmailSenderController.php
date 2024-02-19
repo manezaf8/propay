@@ -10,16 +10,16 @@
 namespace Controller;
 
 use Model\Person;
-use Monolog\Logger;
-use PHPMailer\PHPMailer\SMTP;
 use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 class EmailSenderController
 {
     /**
-     * Send Email 
+     * Send Email
      *
      * @param integer $userId
      * @return void
@@ -50,12 +50,12 @@ class EmailSenderController
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
             $mail->SMTPDebug = SMTP::DEBUG_OFF;
             $mail->isSMTP();
-            $mail->Host       = $host;
-            $mail->SMTPAuth   = true;
-            $mail->Username   = $username;
-            $mail->Password   = $password;
+            $mail->Host = $host;
+            $mail->SMTPAuth = true;
+            $mail->Username = $username;
+            $mail->Password = $password;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       =  $port;
+            $mail->Port = $port;
 
             //Recipients
             $mail->setFrom('notifications@ental.co.za', 'ProPay SA');
@@ -69,12 +69,12 @@ class EmailSenderController
             //Content
             $mail->isHTML(true);
             $mail->Subject = 'You have been added to ProPay';
-                $mail->Body = "<html>
+            $mail->Body = "<html>
                                 <body>
                                     <p>Heeey <b>{$personData['name']}</b></p>
                                     <p>Welcome to ProPay!</p>
                                     <p>Congratulations on joining our community. We are thrilled to have you on board.</p>
-                                    <p>At Propay, we believe in making your experience seamless and secure. You are now in trusted hands, 
+                                    <p>At Propay, we believe in making your experience seamless and secure. You are now in trusted hands,
                                         and we are here to assist you every step of the way.</p>
                                     <p>What you can expect:</p>
                                     <ul>

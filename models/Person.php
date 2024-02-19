@@ -9,11 +9,11 @@
 
 namespace Model;
 
-use mysqli;
-use DateTime;
 use Core\Database;
-use Monolog\Logger;
+use DateTime;
 use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use mysqli;
 
 class Person
 {
@@ -256,7 +256,6 @@ class Person
         }
     }
 
-
     /**
      * Check if email or RSA ID exist
      *
@@ -275,8 +274,6 @@ class Person
 
         return ($row['count'] > 0);
     }
-
-
 
     /**
      * Get All userss
@@ -345,7 +342,7 @@ class Person
      * Get user by ID
      *
      * @param mixed $id
-     * 
+     *
      */
     public static function getUserInfoById($id)
     {
@@ -387,7 +384,7 @@ class Person
         $serializedInterests = serialize($this->interests);
 
         // Prepare the SQL statement
-        $sql = "UPDATE user 
+        $sql = "UPDATE user
                 SET name = ?, surname = ?,  mobile_number = ?, email_address = ?, language = ?, interests = ?
                 WHERE id = ?";
 
@@ -404,7 +401,6 @@ class Person
             $serializedInterests,
             $this->id
         );
-
 
         // Check for errors in the prepared statement
         if (!$stmt) {
@@ -430,7 +426,6 @@ class Person
             return false;
         }
     }
-
 
     /**
      * Delete A User

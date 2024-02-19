@@ -5,18 +5,17 @@ require BASE_PATH . '/helper/functions.php';
 
 $config = include 'config.php';
 $extensionPath = $config['path']['additionalPath'];
-$siteUrl = getSiteUrl();
 
 define('BASE_URL', getSiteUrl());
 
-use Monolog\Logger;
 use Controller\EmailSenderController;
-use League\Event\EventDispatcher;
-use League\Event\ListenerPriority;
-use Monolog\Handler\StreamHandler;
 use Events\EmailSenderListener;
 use Events\NewUserRegisteredEvent;
+use League\Event\EventDispatcher;
+use League\Event\ListenerPriority;
 use League\Event\PrioritizedListenerRegistry;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 // Create the logger
 $logger = new Logger('PROPAY-DEBUG');
