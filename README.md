@@ -1,5 +1,5 @@
 # ProPay: Streamlined People Management
-ProPay is a web-based system designed for efficient people management, offering a range of features for seamless user data handling. Developed with a mini OOP PHP framework-like system that utilizes composer to add external Libraries.
+ProPay is a web-based system designed for efficient people management, offering a range of features for seamless user data handling. Developed with a mini OOP PHP framework-like MVC system that utilizes composer to add external Libraries.
 # Key Features
 # 1. User-Centric Operations
 -	*Create:* Capture new user data effortlessly.
