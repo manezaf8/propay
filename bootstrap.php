@@ -7,6 +7,7 @@ $config = include 'config.php';
 $extensionPath = $config['path']['additionalPath'];
 
 define('BASE_URL', getSiteUrl());
+define('EXTENTION_PATH', $extensionPath);
 
 use Controller\EmailSenderController;
 use Events\EmailSenderListener;

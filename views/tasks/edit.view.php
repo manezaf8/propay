@@ -2,7 +2,6 @@
 
 require BASE_PATH . '/vendor/autoload.php';
 
-$config = include 'config.php';
 
 use Model\Person;
 use Monolog\Handler\StreamHandler;
@@ -13,7 +12,6 @@ $logger = new Logger('Geo-location');
 // Now add some handlers
 $logger->pushHandler(new StreamHandler('var/System.log', Logger::DEBUG));
 
-$extensionPath = $config['path']['additionalPath'];
 
 // Fetch the task details for the given ID
 if (isset($_GET['id'])) {
@@ -172,7 +170,7 @@ if (isset($_GET['id'])) {
 
 
                             <div id="contacts" class=" form-container">
-                                <form id="contact submitForm" class="row" action="<?= $extensionPath ?>/user-edit-submit" method="post">
+                                <form id="contact submitForm" class="row" action="<?= EXTENTION_PATH ?>/user-edit-submit" method="post">
                                     <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                                     <div class="form-group">
                                         <label for="name">Name:</label>

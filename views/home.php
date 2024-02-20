@@ -1,7 +1,6 @@
 <?php
 require BASE_PATH . '/vendor/autoload.php';
 
-$config = include 'config.php';
 
 use Model\Person;
 use Monolog\Logger;
@@ -12,7 +11,6 @@ $logger = new Logger('Geo-location');
 // Now add some handlers
 $logger->pushHandler(new StreamHandler('var/System.log', Logger::DEBUG));
 
-$extensionPath = $config['path']['additionalPath'];
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +40,9 @@ $extensionPath = $config['path']['additionalPath'];
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+    <!-- Include SweetAlert2 CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- Javascript Files
     ================================================== -->
@@ -156,7 +157,7 @@ $extensionPath = $config['path']['additionalPath'];
 
 
                             <div id="contacts" class=" form-container">
-                                <form id="contact submitForm" class="row" action="<?= $extensionPath ?>/user-submit" method="post">
+                                <form id="contact submitForm" class="row" action="<?= EXTENTION_PATH ?>/user-submit" method="post">
 
                                     <div class="form-group">
                                         <label for="name">Name:</label>
@@ -332,7 +333,7 @@ $extensionPath = $config['path']['additionalPath'];
 
                                             <td>
                                                 <!-- Display user ID as a clickable link -->
-                                                <a href="<?= $extensionPath ?>/user-display?id=<?php echo $user->getId(); ?>">
+                                                <a href="<?= EXTENTION_PATH ?>/user-display?id=<?php echo $user->getId(); ?>">
                                                     <button class="btn btn-primary btn-sm">Display</button>
                                                 </a>
                                             </td>
@@ -348,15 +349,38 @@ $extensionPath = $config['path']['additionalPath'];
                                             <!-- JavaScript function to confirm and delete the user -->
                                             <script>
                                                 function deleteuser(userId) {
-                                                    if (confirm("Are you sure you want to delete this user?")) {
-                                                        window.location.href = "<?= $extensionPath ?>/user-delete?id=" + userId;
-                                                    }
+                                                    Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: 'You won\'t be able to revert this!',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Yes, delete it!'
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            // If user clicks "Yes," redirect to delete URL
+                                                            window.location.href = "<?= EXTENTION_PATH ?>/user-delete?id=" + userId;
+                                                        }
+                                                    });
                                                 }
 
+
                                                 function edituser(userId) {
-                                                    if (confirm("Are you sure you want to edit this user?")) {
-                                                        window.location.href = "<?= $extensionPath ?>/user-edit?id=" + userId;
-                                                    }
+                                                    Swal.fire({
+                                                        title: 'Are you sure?',
+                                                        text: 'You are about to edit this user.',
+                                                        icon: 'question',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: 'Yes, edit it!'
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            // If user clicks "Yes," redirect to edit URL
+                                                            window.location.href = "<?= EXTENTION_PATH ?>/user-edit?id=" + userId;
+                                                        }
+                                                    });
                                                 }
                                             </script>
                                         </tr>
@@ -506,39 +530,39 @@ $extensionPath = $config['path']['additionalPath'];
 
     <script>
         // ID number and Birthday validation 
-        $(document).ready(function () {
-        $('#birth_date').on('blur', function () {
-            var birthDate = $(this).val();
-            var idNumber = $('#sa_id_number').val();
+        $(document).ready(function() {
+            $('#birth_date').on('blur', function() {
+                var birthDate = $(this).val();
+                var idNumber = $('#sa_id_number').val();
 
-            // Parse date using moment.js with the expected format
-            var parsedDate = moment(birthDate, 'DD/MM/YYYY', true);
+                // Parse date using moment.js with the expected format
+                var parsedDate = moment(birthDate, 'DD/MM/YYYY', true);
 
-            // Check if the parsed date is valid and matches the first 6 digits of the ID
-            if (parsedDate.isValid() && idNumber.startsWith(parsedDate.format('YYMMDD'))) {
-                $('#birthdateError').hide();
-            } else {
-                $('#birthdateError').show();
-            }
+                // Check if the parsed date is valid and matches the first 6 digits of the ID
+                if (parsedDate.isValid() && idNumber.startsWith(parsedDate.format('YYMMDD'))) {
+                    $('#birthdateError').hide();
+                } else {
+                    $('#birthdateError').show();
+                }
+            });
+
+            // Form submission validation
+            $('form').on('submit', function(event) {
+                var birthDate = $('#birth_date').val();
+                var idNumber = $('#sa_id_number').val();
+
+                // Parse date using moment.js with the expected format
+                var parsedDate = moment(birthDate, 'DD/MM/YYYY', true);
+
+                // Check if the parsed date is valid and matches the first 6 digits of the ID
+                if (!parsedDate.isValid() || !idNumber.startsWith(parsedDate.format('YYMMDD'))) {
+                    $('#birthdateError').show();
+                    event.preventDefault(); // Prevent form submission
+                } else {
+                    $('#birthdateError').hide();
+                }
+            });
         });
-
-        // Form submission validation
-        $('form').on('submit', function (event) {
-            var birthDate = $('#birth_date').val();
-            var idNumber = $('#sa_id_number').val();
-
-            // Parse date using moment.js with the expected format
-            var parsedDate = moment(birthDate, 'DD/MM/YYYY', true);
-
-            // Check if the parsed date is valid and matches the first 6 digits of the ID
-            if (!parsedDate.isValid() || !idNumber.startsWith(parsedDate.format('YYMMDD'))) {
-                $('#birthdateError').show();
-                event.preventDefault(); // Prevent form submission
-            } else {
-                $('#birthdateError').hide();
-            }
-        });
-    });
     </script>
 
 
