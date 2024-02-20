@@ -31,7 +31,15 @@ if (array_key_exists($cleanRoute, $routes)) {
     // Adjust the namespace and path based on the folder structure
     $controllerNamespace = 'Controller\\';
     $controllerPath = BASE_PATH . '/controllers/';
-
+    
+    // Get the subdirectory if it exists
+    $subDir = str_replace(BASE_PATH, '', dirname(__FILE__));
+    $subDirNamespace = str_replace('/', '\\', ltrim($subDir, '/'));
+    
+    // Append the subdirectory namespace
+    $controllerNamespace .= $subDirNamespace;
+    
+    // Require the controller file
     require $controllerPath . $controller . '.php';
 
     // Assuming the controllers are in a namespace
